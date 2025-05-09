@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>College Explorer</title>
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- AOS Library CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+
+  <!-- AOS Library JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+
+</head>
+<body>
+
+  <!-- 🔝 Top Navigation Bar -->
+  <nav class="navbar">
+    <a href="#home">Home</a>
+    <a href="#services">Services</a>
+    <a href="#about">About</a>
+    <a href="#support">Support</a>
+  </nav>
+
+  <!-- 🏠 Home Section / Header -->
+  <header id="home" data-aos="fade-down">
+    <h1>🎓 College Explorer</h1>
+    <p data-aos="fade-up">Your one-stop platform to explore the best colleges in South India.</p>
+    <div class="filters" data-aos="zoom-in">
+      <input type="text" id="searchInput" placeholder="Search for colleges..." />
+      <select id="locationFilter">
+        <option value="">All Locations</option>
+        <option value="Hyderabad">Hyderabad</option>
+        <option value="Bengaluru">Bengaluru</option>
+        <option value="Chennai">Chennai</option>
+        <option value="Kochi">Kochi</option>
+        <option value="Coimbatore">Coimbatore</option>
+        <option value="Vijayawada">Vijayawada</option>
+        <option value="Vizag">Vizag</option>
+        <option value="Tirupati">Tirupati</option>
+        <option value="Mysore">Mysore</option>
+      </select>
+      <select id="ratingFilter">
+        <option value="">All Ratings</option>
+        <option value="4.5">4.5+</option>
+        <option value="4.0">4.0+</option>
+        <option value="3.5">3.5+</option>
+      </select>
+  <!-- New Facilities Filter -->
+      <select id="facilitiesFilter">
+        <option value="">All Facilities</option>
+        <option value="Hostel">Hostel</option>
+        <option value="Bus Transport">Bus Transport</option>
+        <option value="Cafeteria">Cafeteria</option>
+        <option value="Library">Library</option>
+        <option value="Wi-Fi Campus">Wi-Fi Campus</option>
+        <option value="Workshops">Workshops</option>
+        <option value="Cricket Ground">Cricket Ground</option>
+      </select>
+
+      <button id="clearFiltersBtn" data-aos="fade-up">Clear Filters</button>
+    </div>
+
+    <!-- User Profile Section -->
+<div class="user-profile">
+    <button id="userProfileBtn" class="profile-btn">
+      <img src="C:\Users\udayu\OneDrive\Pictures\apex\bahubali.jpeg" alt="User Profile" class="profile-pic" />
+      <span class="username">Uday Kumar</span>
+    </button>
+
+    <!-- Add Wishlisted Colleges Button -->
+    <button id="wishlistedCollegesBtn" class="wishlist-view-btn" onclick="showWishlistedColleges()">🌟 Wishlisted Colleges</button> 
+ </div>
+  
+  <!-- User Info Modal -->
+  <div id="userInfoModal" class="modal hidden">
+    <div class="modal-content">
+      <button class="close-btn" onclick="closeUserInfoModal()">&times;</button>
+      <h2>User Information</h2>
+      <p><strong>Name:</strong> Uday Kumar</p>
+      <p><strong>Address:</strong> Hyderabad, India</p>
+      <p><strong>Exam:</strong> EAMCET</p>
+      <p><strong>Rank:</strong> 1234</p>
+      <p><strong>Category:</strong> General</p>
+    </div>
+  </div>
+
+  </header>
+
+  <main>
+    <div id="collegeContainer" class="college-grid">
+      <!-- College cards will be injected here -->
+    </div>
+
+    <!-- 💬 College Details Modal -->
+    <div id="collegeDetailsModal" class="modal hidden">
+      <div class="modal-content">
+        <button class="close-btn" onclick="closeCollegeDetails()">&times;</button>
+        <h2 id="modalCollegeName">🎓 ABC College</h2>
+        <p id="modalCollegeLocation">📍 <strong>Location:</strong> Hyderabad</p>
+        <p id="modalCollegeRating">⭐ <strong>Rating:</strong> 4.5</p>
+        <p id="modalCollegeCutoff">📊 <strong>Cutoff:</strong> EAMCET 500</p>
+        <p id="modalCollegeFee">💰 <strong>Fee:</strong> ₹2,20,000/year</p>
+        <p id="modalCollegeCourses">📚 <strong>Courses:</strong> CSE, ECE, ME, AI/DS</p>
+        <p id="modalCollegeDuration">⏳ <strong>Duration:</strong> 4 years</p>
+        <p id="modalCollegeType">🏫 <strong>Type:</strong> Private</p>
+        <p id="modalCollegeMode">🕒 <strong>Mode:</strong> Full-time</p>
+        <p id="modalCollegeAccreditation">📜 <strong>Accreditation:</strong> NAAC A++</p>
+        <p id="modalCollegeAffiliation">🤝 <strong>Affiliation:</strong> JNTU Hyderabad</p>
+        <p id="modalCollegeScholarships">🎓 <strong>Scholarships:</strong> Merit-based and government scholarships available</p>
+        <p id="modalCollegeAveragePackage">💼 <strong>Average Package:</strong> ₹6.0 LPA</p>
+        <p id="modalCollegeTopRecruiters">🏢 <strong>Top Recruiters:</strong> Deloitte, TCS, Accenture, Infosys, Virtusa</p>
+        <p id="modalCollegeFacilities">🏠 <strong>Facilities:</strong> Innovation Labs, Wi-Fi Campus, Library, Hostels</p>
+        <p id="modalCollegeStudentReviews">🗣️ <strong>Student Reviews:</strong> Best balance of academics and co-curricular activities.</p>
+        <a id="modalCollegeLink" href="#" target="_blank" class="more-info-link">🔗 More Info</a>
+        <button id="wishlistButton" class="wishlist-btn" onclick="toggleWishlistFromModal()">❤️ Save to Wishlist</button>    
+      </div>
+    </div>
+
+    <!-- 🛠️ Services Section -->
+    <section id="services" class="college-section gray-section" data-aos="fade-right">
+      <h2>🌟 Most Featured Colleges</h2>
+      <div class="college-grid" data-aos="zoom-in">
+        <div class="college-card" data-aos="fade-right">College 1</div>
+        <div class="college-card" data-aos="fade-right">College 2</div>
+        <div class="college-card" data-aos="fade-right">College 3</div>
+        <div class="college-card" data-aos="fade-right">College 4</div>
+      </div>
+    </section>
+
+    <!-- 🏆 Top Rated Colleges Section -->
+    <section id="topRatedColleges" class="college-section" data-aos="fade-left">
+      <h2>🏆 Top Rated Colleges</h2>
+      <div class="college-grid" data-aos="zoom-in">
+        <div class="college-card" data-aos="fade-left">College A</div>
+        <div class="college-card" data-aos="fade-left">College B</div>
+        <div class="college-card" data-aos="fade-left">College C</div>
+        <div class="college-card" data-aos="fade-left">College D</div>
+      </div>
+        <!-- Top-rated colleges will be dynamically added here -->
+      
+    </section>
+
+    <!-- 📊 EAMCET Colleges Section -->
+    <section id="eamcetColleges" class="college-section" data-aos="fade-up">
+      <h2>📊 EAMCET Based Colleges</h2>
+      <div class="college-grid" data-aos="zoom-in">
+        <!-- EAMCET-based colleges will be dynamically added here -->
+      </div>
+    </section>
+
+    <!-- 📘 About Section -->
+    <section id="about" class="college-section gray-section" data-aos="fade-right">
+      <h2>👋 About College Explorer</h2>
+      <p data-aos="fade-up">College Explorer is your go-to platform for discovering top colleges in South India. Whether you’re looking by location, rating, or entrance cutoffs, we’ve got you covered with real-time data and a user-friendly experience.</p>
+    </section>
+
+    <!-- 📞 Support Section -->
+    <section id="support" class="college-section gray-section" data-aos="fade-left">
+      <h2>📞 Need Help?</h2>
+      <p data-aos="fade-up">If you have any questions, feedback, or suggestions, feel free to contact us at <a href="mailto:support@collegeexplorer.com">support@collegeexplorer.com</a>.</p>
+      <button id="needSupportBtn" onclick="navigateToSupportForm()" data-aos="zoom-in">Need Support</button>
+    </section>
+
+  <script>
+    function navigateToSupportForm() {
+      window.location.href = 'support.html';
+    }
+  </script>
+
+  </main>
+
+  <!-- 🧾 Footer -->
+  <footer>
+    <p>© 2025 College Explorer | Built with ❤️</p>
+  </footer>
+
+  <!-- 💡 JS Script -->
+  <script src="script.js"></script>
+
+  <div id="wishlistedCollegesModal" class="modal hidden">
+    <div class="modal-content">
+        <button class="close-btn" onclick="closeWishlistedCollegesModal()">&times;</button>
+        <h2>🌟 Wishlisted Colleges</h2>
+        <ul id="wishlistedCollegesList">
+            <!-- Wishlisted colleges will be dynamically added here -->
+        </ul>
+    </div>
+</div>
+
+<script>
+  AOS.init({
+    duration: 1000, // Animation duration in milliseconds
+    once: true, // Whether animation should happen only once
+    easing: 'ease-in-out', // Easing function for animationsssss
+  });
+</script>
+
+</body>
+</html>

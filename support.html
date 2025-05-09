@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Support - College Explorer</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- 🔝 Top Navigation Bar -->
+  <nav class="navbar">
+    <a href="index.html">Home</a>
+    <a href="#services">Services</a>
+    <a href="#about">About</a>
+    <a href="support.html">Support</a>
+  </nav>
+
+  <!-- 📞 Support Section -->
+  <section id="support" class="support-section">
+    <h1>📞 Need Help?</h1>
+    <p>If you have any questions, feedback, or suggestions, please fill out the form below or contact us at <a href="mailto:support@collegeexplorer.com">support@collegeexplorer.com</a>.</p>
+    <form id="supportForm" class="support-form">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" placeholder="Your Name" required />
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" placeholder="Your Email" required />
+
+      <label for="message">Message:</label>
+      <textarea id="message" name="message" placeholder="Your Message" rows="5" required></textarea>
+
+      <button type="submit">Submit</button>
+    </form>
+
+    <!-- Return Home Button -->
+    <div class="return-home">
+      <a href="index.html" class="return-home-btn">🏠 Return Home</a>
+    </div>
+
+    
+  </section>
+
+  <!-- 🧾 Footer -->
+  <footer>
+    <p>© 2025 College Explorer | Built with ❤️</p>
+  </footer>
+
+  <!-- 💡 JS Script -->
+  <script>
+    document.getElementById('supportForm').addEventListener('submit', function (event) {
+      event.preventDefault();
+      alert('Thank you for reaching out! We will get back to you soon.');
+      this.reset();
+    });
+  </script>
+</body>
+</html>
