@@ -24,7 +24,20 @@ Displays detailed information about colleges, including location, rating, course
 Support Section
 Contact support for assistance or feedback.
 
+ Additionally, it includes a To-Do List and Image Gallery feature to demonstrate advanced DOM manipulation and interactivity using JavaScript.
+
+To-Do List
+Add Tasks: Users can add tasks dynamically.
+Delete Tasks: Each task has a delete button to remove it from the list.
+Interactive Design: Includes animations and hover effects for a modern look.
+
+Image Gallery
+Upload Images: Users can upload images directly from their computer.
+Dynamic Preview: Uploaded images are displayed in the gallery immediately.
+Delete Images: Each image has a delete button to remove it from the gallery.
+Responsive Layout: The gallery adjusts to different screen sizes using CSS Grid.
+
 ## Installation
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/CollegeExplorerlatest.git
+git clone https://github.com/Udayuk19/CollegeExplorerlatest.git
