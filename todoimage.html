@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>To-Do List and Image Gallery</title>
+  <style>
+    /* General Styling */
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #4CAF50, #81C784);
+      color: #333;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 50px auto;
+      padding: 20px;
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    h1 {
+      text-align: center;
+      color: #4CAF50;
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+
+    .button-group {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+
+    .button-group button {
+      padding: 10px 20px;
+      background: linear-gradient(135deg, #4CAF50, #81C784);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    .button-group button:hover {
+      background: linear-gradient(135deg, #388E3C, #66BB6A);
+      transform: scale(1.05);
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    /* To-Do List Styling */
+    .todo-input {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .todo-input input {
+      flex: 1;
+      padding: 12px;
+      border: 2px solid #ccc;
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+
+    .todo-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .todo-list li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px;
+      margin-bottom: 10px;
+      background: #f9f9f9;
+      border: 2px solid #ddd;
+      border-radius: 8px;
+    }
+
+    .todo-list li button {
+      background-color: #ff4d4d;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 8px 12px;
+      font-size: 0.9rem;
+      cursor: pointer;
+    }
+
+    /* Image Gallery Styling */
+    .image-input {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .image-input input {
+      flex: 1;
+      padding: 12px;
+      border: 2px solid #ccc;
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 15px;
+    }
+
+    .gallery-item {
+      position: relative;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .gallery-item button {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      background-color: #ff4d4d;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      padding: 5px 10px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>To-Do List and Image Gallery</h1>
+    <div class="button-group">
+      <button onclick="showSection('todo')">To-Do List</button>
+      <button onclick="showSection('gallery')">Image Gallery</button>
+    </div>
+
+    <!-- To-Do List Section -->
+    <div id="todoSection">
+      <div class="todo-input">
+        <input type="text" id="taskInput" placeholder="Enter a new task...">
+        <button onclick="addTask()">Add Task</button>
+      </div>
+      <ul id="todoList" class="todo-list">
+        <!-- Tasks will be dynamically added here -->
+      </ul>
+    </div>
+
+    <!-- Image Gallery Section -->
+    <div id="gallerySection" class="hidden">
+        <div class="image-input">
+            <label for="imageFile" style="font-weight: bold;">Add Image to Gallery:</label>
+            <input type="file" id="imageFile" accept="image/*">
+            <button onclick="addImage()">Add Image</button>
+        </div>
+        <div id="gallery" class="gallery">
+        <!-- Images will be dynamically added here -->
+        </div>
+    </div>
+  </div>
+
+  <script>
+    // Function to toggle sections
+    function showSection(section) {
+      const todoSection = document.getElementById('todoSection');
+      const gallerySection = document.getElementById('gallerySection');
+
+      if (section === 'todo') {
+        todoSection.classList.remove('hidden');
+        gallerySection.classList.add('hidden');
+      } else if (section === 'gallery') {
+        gallerySection.classList.remove('hidden');
+        todoSection.classList.add('hidden');
+      }
+    }
+
+    // Function to add a new task
+    function addTask() {
+      const taskInput = document.getElementById('taskInput');
+      const taskValue = taskInput.value.trim();
+
+      if (taskValue === '') {
+        alert('Please enter a task!');
+        return;
+      }
+
+      const todoList = document.getElementById('todoList');
+
+      // Create a new list item
+      const listItem = document.createElement('li');
+      listItem.textContent = taskValue;
+
+      // Create a delete button
+      const deleteButton = document.createElement('button');
+      deleteButton.textContent = 'Delete';
+      deleteButton.onclick = function () {
+        todoList.removeChild(listItem);
+      };
+
+      // Append the delete button to the list item
+      listItem.appendChild(deleteButton);
+
+      // Append the list item to the to-do list
+      todoList.appendChild(listItem);
+
+      // Clear the input field
+      taskInput.value = '';
+    }
+  // Function to add a new image
+  function addImage() {
+    const imageFileInput = document.getElementById('imageFile');
+    const file = imageFileInput.files[0];
+
+    if (!file) {
+      alert('Please choose an image file!');
+      return;
+    }
+
+    const gallery = document.getElementById('gallery');
+
+    // Create a new gallery item
+    const galleryItem = document.createElement('div');
+    galleryItem.classList.add('gallery-item');
+
+    // Create an image element
+    const img = document.createElement('img');
+    img.src = URL.createObjectURL(file);
+    img.alt = 'Gallery Image';
+
+    // Create a delete butthison
+    const deleteButton = document.createElement('button');
+    deleteButton.textContent = 'Delete';
+    deleteButton.onclick = function () {
+      gallery.removeChild(galleryItem);
+    };
+
+    // Append the image and delete button to the gallery item
+    galleryItem.appendChild(img);
+    galleryItem.appendChild(deleteButton);
+
+    // Append the gallery item to the gallery
+    gallery.appendChild(galleryItem);
+
+    // Clear the file input
+    imageFileInput.value = '';
+  }
+</script>
+  </script>
+</body>
+</html>
