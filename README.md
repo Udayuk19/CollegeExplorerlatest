@@ -23,3 +23,8 @@ College Details Modal
 Displays detailed information about colleges, including location, rating, courses, and recruiters.
 Support Section
 Contact support for assistance or feedback.
+
+## Installation
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/your-username/quiz-app.git
